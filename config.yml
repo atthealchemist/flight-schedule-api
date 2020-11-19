@@ -1,0 +1,9 @@
+server:
+  host: 127.0.0.1
+  port: 3333
+provider:
+  name: Pobeda
+  api_url: https://www.pobeda.aero/segmentsstatus/api/v1/segmentsstatuscustom?query.requestDate={flight_date}
+  headers:
+    apikey: 3570b7304cf0c3397670581657a6ee0ef72256bcb4c4021be666fd144c8d9f20
+    Cookie: ApiSessionId=xw2lq02nbxvloh2yt5w11d5o
