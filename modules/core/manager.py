@@ -4,7 +4,7 @@ import json
 class AirportManager:
 
     def fetch_airports_from_json(self):
-        with open('airports.json', 'r+') as file:
+        with open('../../assets/airports.json', 'r+') as file:
             content = file.read()
             return json.loads(content)
 

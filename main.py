@@ -1,8 +1,5 @@
-from datetime import datetime
-from string import Template
-
-from fetcher import FlightFetcher
-from schedule import FlightSchedule
+from modules.core.fetcher import FlightFetcher
+from modules.entities.schedule import FlightSchedule
 
 
 def main():

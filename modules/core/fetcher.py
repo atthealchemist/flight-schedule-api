@@ -3,8 +3,8 @@ from typing import List
 
 import requests
 
-from route import FlightRoute
-from flight import FlightInfo
+from modules.entities.route import FlightRoute
+from modules.entities.flight import FlightInfo
 from utils import load_config
 
 

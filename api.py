@@ -6,11 +6,11 @@ from typing import Optional
 from fastapi import FastAPI, Path, Query
 import uvicorn
 
-from route import FlightRoute
-from fetcher import FlightFetcher
-from manager import AirportManager
-from schedule import FlightSchedule
-from utils import load_config
+from modules.entities.route import FlightRoute
+from modules.core.fetcher import FlightFetcher
+from modules.core.manager import AirportManager
+from modules.entities.schedule import FlightSchedule
+from modules.core.utils import load_config
 
 app = FastAPI(
     title="Pobeda Schedule API",

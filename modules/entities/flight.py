@@ -1,9 +1,8 @@
-import json
 from dataclasses import dataclass
 from string import Template
 
-from manager import AirportManager
-from utils import parse_time_from_date_string, calculate_flight_duration
+from modules.core.manager import AirportManager
+from modules.core.utils import parse_time_from_date_string, calculate_flight_duration
 
 
 @dataclass
