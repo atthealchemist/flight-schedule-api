@@ -32818,5 +32818,25 @@
       "latitude": -5.875556,
       "longitude": 29.25
     }
+  },
+  {
+    "name": "Zhukovsky",
+    "city": "Moscow",
+    "country": "Russia",
+    "iata": "ZIA",
+    "location": {
+      "latitude": 55.560036,
+      "longitude": 38.119148
+    }
+  },
+  {
+    "name": "Ostafyevo",
+    "city": "Moscow",
+    "country": "Russia",
+    "iata": "OSF",
+    "location":  {
+      "latitude": 55.502911,
+      "longitude": 37.510742
+    }
   }
 ]

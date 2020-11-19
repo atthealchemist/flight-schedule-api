@@ -2,8 +2,8 @@ from datetime import date
 from string import Template
 from typing import List
 
-from route import FlightRoute
-from flight import FlightInfo
+from modules.entities.route import FlightRoute
+from modules.entities.flight import FlightInfo
 
 
 class FlightSchedule:

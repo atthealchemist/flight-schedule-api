@@ -33,26 +33,33 @@ def home():
     return dict(now=str(datetime.now()))
 
 
-@app.get('/airports/{iata}',
+@app.get('/airports/',
          tags=['airports'],
          summary="Get list of airports")
-def get_airports(iata: str = Path(..., description="IATA code of airport ('all' for all airports)", max_length=3),
-                 page: Optional[int] = 5,
+def get_airports(iata: Optional[str] = '',
+                 country: Optional[str] = '',
+                 city: Optional[str] = '',
+                 page: Optional[int] = 1,
                  limit: Optional[int] = 10):
     """
     Get list of airports, could be limited by concrete count and paginated
     """
     manager = AirportManager()
     airports = manager.fetch_airports_from_json()
-    pages_count = int(len(airports) / limit)
-    count = limit * page
-    if iata != 'all':
+
+    if country:
+        airports = manager.find_airports_by_country(country)
+    if city:
+        airports = manager.find_airports_by_city(city)
+    if iata:
         airports = manager.find_airport_by_iata(iata)
-        result = airports
-    else:
-        airports = airports[count:count + limit]
-        result = dict(page=page, total_pages=pages_count, airports=airports)
-    return result
+    if page and limit:
+        pages_count = int(len(airports) / limit)
+        count = limit * page
+        if not city and not country:
+            airports = airports[count:count + limit]
+            airports = dict(page=page, total_pages=pages_count, airports=airports)
+    return dict(count=len(airports), airports=airports)
 
 
 @app.get('/schedule/{departure_airport_iata}/{arrival_airport_iata}/{flight_date}/',

@@ -5,7 +5,7 @@ import requests
 
 from modules.entities.route import FlightRoute
 from modules.entities.flight import FlightInfo
-from utils import load_config
+from modules.core.utils import load_config
 
 
 class FlightFetcher:
