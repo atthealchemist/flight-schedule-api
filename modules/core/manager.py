@@ -9,7 +9,7 @@ class AirportManager:
             return json.loads(content)
 
     def find_airport_by_iata(self, iata):
-        airport, *_ = filter(lambda a: a.get('iata_code') == iata.upper(), self.fetch_airports_from_json())
+        airport, *_ = filter(lambda a: a.get('iata') == iata.upper(), self.fetch_airports_from_json())
         return airport
 
     @staticmethod
