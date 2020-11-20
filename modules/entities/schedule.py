@@ -28,11 +28,11 @@ class FlightSchedule:
     def flights(self):
         flights = self._flights
         if self.direction == 'forward':
-            flights = [f.departure_airport_iata == self.flight_direction.departure_airport_iata
-                       for f in flights]
+            flights = [f for f in flights
+                       if f.departure_airport_iata == self.flight_direction.departure_airport_iata]
         if self.direction == 'backward':
-            flights = [f.departure_airport_iata == self.flight_direction.arrival_airport_iata
-                       for f in flights]
+            flights = [f for f in flights
+                       if f.departure_airport_iata == self.flight_direction.arrival_airport_iata]
         return flights
 
     def __init__(self, flight_fetcher: FlightFetcher = None, direction: str = 'both'):
