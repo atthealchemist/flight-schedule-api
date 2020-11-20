@@ -30,10 +30,9 @@ class FlightFetcher:
         json_flights = response.json()
 
         flights_response = json_flights.get('segments')
-        filtered_flights = [self.filter_flights(
-            departure=f.get('origin'),
-            arrival=f.get('destination')
-        ) for f in flights_response]
+
+        filtered_flights = [f for f in flights_response if self.filter_flights(departure=f.get('origin'),
+            arrival=f.get('destination'))]
 
         for flight in filtered_flights:
             flight_info = FlightInfo.from_dict(flight)
