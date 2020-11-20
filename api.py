@@ -88,14 +88,18 @@ def schedule(
 
     flights = flight_schedule.flights
 
+    flights = dict(
+        count=len(flights),
+        date=flight_date,
+        direction=direction,
+        departure_airport_iata=departure_airport_iata,
+        arrival_airport_iata=arrival_airport_iata,
+        flights=flights
+    )
+
     if printable:
         flights = str(flight_schedule)
-    return dict(count=len(flights),
-                date=flight_date,
-                direction=direction,
-                departure_airport_iata=departure_airport_iata,
-                arrival_airport_iata=arrival_airport_iata,
-                flights=flights)
+    return flights
 
 
 def main():
