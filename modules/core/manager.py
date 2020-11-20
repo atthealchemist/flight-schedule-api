@@ -9,15 +9,15 @@ class AirportManager:
             self.airports = json.loads(content)
 
     def find_airport_by_iata(self, iata):
-        airports = [a.get('iata') == iata.upper() for a in self.airports]
+        airports = [a for a in self.airports if a.get('iata') == iata.upper()]
         return airports
 
     def find_airports_by_city(self, city):
-        airports = [a.get('city').lower() == city.lower() for a in self.airports]
+        airports = [a for a in self.airports if a.get('city').lower() == city.lower()]
         return airports
 
     def find_airports_by_country(self, country):
-        airports = [a.get('country').lower() == country.lower() for a in self.airports]
+        airports = [a for a in self.airports if a.get('country').lower() == country.lower()]
         return airports
 
     @staticmethod
