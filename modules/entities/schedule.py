@@ -17,7 +17,7 @@ class FlightSchedule:
         schedule_header = Template("\t\t[Расписание рейсов $flight_direction на $flight_date]\t\t\n")
         result_schedule_str += schedule_header.safe_substitute(
             flight_direction=self.flight_direction,
-            flight_date=self.flight_date
+            flight_date=self.flight_date.strftime("%Y-%m-%d")
         )
         for flight in self._flights:
             result_schedule_str += str(flight) + '\n'

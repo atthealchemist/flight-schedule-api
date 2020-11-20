@@ -5,6 +5,7 @@ from typing import Optional
 
 from fastapi import FastAPI, Path, Query
 import uvicorn
+from starlette.responses import PlainTextResponse
 
 from modules.entities.route import FlightRoute
 from modules.core.fetcher import FlightFetcher
@@ -98,7 +99,7 @@ def schedule(
     )
 
     if printable:
-        flights = str(flight_schedule)
+        flights = PlainTextResponse(str(flight_schedule))
     return flights
 
 
