@@ -45,7 +45,7 @@ def get_airports(iata: Optional[str] = '',
     Get list of airports, could be limited by concrete count and paginated
     """
     manager = AirportManager()
-    airports = manager.fetch_airports_from_json()
+    airports = manager.airports
 
     if country:
         airports = manager.find_airports_by_country(country)
@@ -56,7 +56,7 @@ def get_airports(iata: Optional[str] = '',
     if page and limit:
         pages_count = int(len(airports) / limit)
         count = limit * page
-        if not city and not country:
+        if not city and not country and not iata:
             airports = airports[count:count + limit]
             airports = dict(page=page, total_pages=pages_count, airports=airports)
     return dict(count=len(airports), airports=airports)

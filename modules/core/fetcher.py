@@ -10,7 +10,7 @@ from modules.core.utils import load_config
 
 class FlightFetcher:
 
-    def filter_flights(self, departure="", arrival=""):
+    def filter_flights(self, departure: str = "", arrival: str = ""):
         departure_iata = self.flight_route.departure_airport_iata
         arrival_iata = self.flight_route.arrival_airport_iata
 
@@ -30,10 +30,10 @@ class FlightFetcher:
         json_flights = response.json()
 
         flights_response = json_flights.get('segments')
-        filtered_flights = filter(lambda f: self.filter_flights(
+        filtered_flights = [self.filter_flights(
             departure=f.get('origin'),
             arrival=f.get('destination')
-        ), flights_response)
+        ) for f in flights_response]
 
         for flight in filtered_flights:
             flight_info = FlightInfo.from_dict(flight)
@@ -44,8 +44,8 @@ class FlightFetcher:
         return self._flights
 
     def __init__(self,
-                 flight_date=datetime.now().date(),
-                 flight_route=FlightRoute(
+                 flight_date: date = datetime.now().date(),
+                 flight_route: FlightRoute = FlightRoute(
                      departure_airport_iata='VKO',
                      arrival_airport_iata='LED'
                  )):

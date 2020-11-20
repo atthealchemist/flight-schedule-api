@@ -2,6 +2,7 @@ from datetime import date
 from string import Template
 from typing import List
 
+from modules.core.fetcher import FlightFetcher
 from modules.entities.route import FlightRoute
 from modules.entities.flight import FlightInfo
 
@@ -27,15 +28,15 @@ class FlightSchedule:
     def flights(self):
         flights = self._flights
         if self.direction == 'forward':
-            flights = list(filter(lambda f: f.departure_airport_iata == self.flight_direction.departure_airport_iata,
-                                  flights))
+            flights = [f.departure_airport_iata == self.flight_direction.departure_airport_iata
+                       for f in flights]
         if self.direction == 'backward':
-            flights = list(filter(lambda f: f.departure_airport_iata == self.flight_direction.arrival_airport_iata,
-                                  flights))
+            flights = [f.departure_airport_iata == self.flight_direction.arrival_airport_iata
+                       for f in flights]
         return flights
 
-    def __init__(self, flight_fetcher=None, direction='both'):
+    def __init__(self, flight_fetcher: FlightFetcher = None, direction: str = 'both'):
         self._flights: List[FlightInfo] = flight_fetcher.flights
         self.flight_direction: FlightRoute = flight_fetcher.flight_route
-        self.direction = direction
+        self.direction: str = direction
         self.flight_date: date = flight_fetcher.flight_date

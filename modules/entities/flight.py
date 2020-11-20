@@ -36,8 +36,8 @@ class FlightInfo:
     def __str__(self):
         flight_info_template = Template(
             """
-        [$flight_departure_time - $flight_arrival_time] $flight_departure_airport -> $flight_arrival_airport <$flight_number> 
-        """.strip()
+[$flight_departure_time - $flight_arrival_time] $flight_departure_airport -> $flight_arrival_airport <$flight_number> 
+""".strip()
         )
 
         substituted_flight_info = flight_info_template.safe_substitute(
