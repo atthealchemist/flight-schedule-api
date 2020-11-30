@@ -2,6 +2,19 @@ from datetime import datetime
 from pathlib import Path
 
 import yaml
+import json
+import base64
+
+
+def fetch_airports_from_json():
+    with open('assets/airports.json', 'r+') as file:
+        content = file.read()
+        return json.loads(content)
+
+
+def image_to_base64(image_path):
+    with open(image_path, "rb") as image_file:
+        return base64.b64encode(image_file.read())
 
 
 def calculate_flight_duration(start, end):

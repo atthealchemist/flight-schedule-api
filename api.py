@@ -38,6 +38,7 @@ def home():
          tags=['airports'],
          summary="Get list of airports")
 def get_airports(iata: Optional[str] = '',
+                 fetch_image: Optional[bool] = False,
                  country: Optional[str] = '',
                  city: Optional[str] = '',
                  page: Optional[int] = 1,
@@ -45,7 +46,9 @@ def get_airports(iata: Optional[str] = '',
     """
     Get list of airports, could be limited by concrete count and paginated
     """
-    manager = AirportManager()
+    manager = AirportManager(
+        fetch_images=fetch_image
+    )
     airports = manager.airports
 
     if country:
@@ -80,7 +83,9 @@ def schedule(
         flight_date=datetime.strptime(flight_date, "%Y-%m-%d"),
         flight_route=FlightRoute(
             departure_airport_iata=departure_airport_iata.upper(),
-            arrival_airport_iata=arrival_airport_iata.upper()
+            arrival_airport_iata=arrival_airport_iata.upper(),
+            airport_names=True,
+            direction=direction
         )
     )
     fetcher.fetch_flight_info()

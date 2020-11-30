@@ -1,24 +1,26 @@
-import json
+from modules.core.utils import fetch_airports_from_json, image_to_base64
 
 
 class AirportManager:
 
-    def fetch_airports_from_json(self):
-        with open('assets/airports.json', 'r+') as file:
-            content = file.read()
-            self.airports = json.loads(content)
+    def fetch_airports(self):
+        self.airports = fetch_airports_from_json()
+
+    def find_airports(self, query):
+        airports = list(filter(query, self.airports))
+        if self.fetch_images:
+            airports = [dict(a, image=image_to_base64("./assets/images/{iata}.jpg".format(
+                iata=a.get('iata').lower()))) for a in airports]
+        return airports
 
     def find_airport_by_iata(self, iata):
-        airports = [a for a in self.airports if a.get('iata') == iata.upper()]
-        return airports
+        return self.find_airports(lambda a: a.get('iata') == iata.upper())
 
     def find_airports_by_city(self, city):
-        airports = [a for a in self.airports if a.get('city').lower() == city.lower()]
-        return airports
+        return self.find_airports(lambda a: a.get('city').lower() == city.lower())
 
     def find_airports_by_country(self, country):
-        airports = [a for a in self.airports if a.get('country').lower() == country.lower()]
-        return airports
+        return self.find_airports(lambda a: a.get('country').lower() == country.lower())
 
     @staticmethod
     def build_airport_name(iata):
@@ -31,7 +33,7 @@ class AirportManager:
             country=airport.get('country')
         )
 
-    def __init__(self):
+    def __init__(self, fetch_images=False):
         self.airports = list()
-
-        self.fetch_airports_from_json()
+        self.fetch_images = fetch_images
+        self.fetch_airports()
